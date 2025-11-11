@@ -40,7 +40,7 @@ def plot_wiggles(
     if pick_times_ms is not None and not np.all(np.isnan(pick_times_ms)):
         min_pick_time = np.nanmin(pick_times_ms)
         min_time = max(0, min_pick_time - 5)
-        max_time = min(max_time, min_pick_time + 30)
+        max_time = min(max_time, min_pick_time + 200)
 
     plt.ylim(min_time, max_time)
     plt.gca().invert_yaxis()  # Put time 0 at the top
