@@ -2,7 +2,7 @@ from picker import SeismicPicker
 from strategies import sta_lta
 from data_loader import load_seismic_data
 from analysis import convert_indices_to_time
-from visualization import plot_wiggles
+from visualization import plot_sismograma
 
 
 ABSOLUTE_THRESHOLD = 2e-5
@@ -26,4 +26,4 @@ if __name__ == "__main__":
     )
 
     print(all_breaks_indices)
-    plot_wiggles(seismic_data, all_breaks_times_ms, SAMPLING_FREQUENCY)
+    plot_sismograma(seismic_data, all_breaks_times_ms, SAMPLING_FREQUENCY)

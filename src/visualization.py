@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from typing import Optional
 
 
-def plot_wiggles(
+def plot_sismograma(
     data_block: np.ndarray,
     pick_times_ms: Optional[np.ndarray],
     frequency: float,
