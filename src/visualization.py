@@ -39,7 +39,7 @@ def plot_wiggles(
     # Try to zoom in if we have valid picks
     if pick_times_ms is not None and not np.all(np.isnan(pick_times_ms)):
         min_pick_time = np.nanmin(pick_times_ms)
-        min_time = max(0, min_pick_time - 5)
+        min_time = max(0, min_pick_time - 1000)
         max_time = min(max_time, min_pick_time + 200)
 
     plt.ylim(min_time, max_time)

@@ -8,7 +8,7 @@ class AbsoluteThresholdStrategy(BasePickingStrategy):
     def __init__(self, threshold: float = 1e-9):
         self._threshold = threshold
 
-    def pick(self, data: np.ndarray) -> np.ndarray:
+    def pick(self, data: np.ndarray, _) -> np.ndarray:
         """Performs first-break picking using the absolute threshold.
 
         Args:

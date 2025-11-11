@@ -18,7 +18,7 @@ class SeismicPicker:
         self._strategy = strategy
         self._sampling_frequency = sampling_frequency
 
-    def run_picking(self, data: np.ndarray) -> np.ndarray:
+    def run_picking(self, data: np.ndarray, gemoetry: np.ndarray) -> np.ndarray:
         """Executes the loaded picking strategy on the seismic data.
 
         Args:
@@ -27,5 +27,5 @@ class SeismicPicker:
         Returns:
             pick_indices (np.ndarray)
         """
-        first_breaks_indices = self._strategy.pick(data)
+        first_breaks_indices = self._strategy.pick(data, gemoetry)
         return first_breaks_indices
