@@ -10,5 +10,5 @@ class BasePickingStrategy(ABC):
     """
 
     @abstractmethod
-    def pick(self, data: np.ndarray) -> np.ndarray:
+    def pick(self, data: np.ndarray, geometry: np.ndarray) -> np.ndarray:
         """Abstract method to perform first-break picking on seismic data."""

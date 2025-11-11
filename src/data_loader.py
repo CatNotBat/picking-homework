@@ -1,6 +1,6 @@
-from typing import Tuple
 import numpy as np
 from scipy.io import loadmat
+from typing import Tuple
 
 
 def load_seismic_data(file_path: str) -> Tuple[np.ndarray, float, np.ndarray]:
@@ -12,14 +12,16 @@ def load_seismic_data(file_path: str) -> Tuple[np.ndarray, float, np.ndarray]:
 
     Returns:
         A tuple of:
-            - seismic_data (np.ndarray): The 2D seismic data array.
-            - sampling_frequency (float): The data's sampling frequency (e.g., 1000.0).
-            - geometry (np.ndarray): The sensor geometry information.
+            - seismic_data (np.ndarray)
+            - sampling_frequency (float)
+            - geometry (np.ndarray)
     """
     mat_data = loadmat(file_path, squeeze_me=True)
 
-    seismic_data_array = mat_data["data"]
+    seismic_data_array = np.asarray(mat_data["data"])
     sampling_frequency = float(mat_data["fs"])
-    geometry = mat_data["geometry"]
+    geometry = np.asarray(mat_data["geometry"])
+
+    seismic_data_array = seismic_data_array.T
 
     return seismic_data_array, sampling_frequency, geometry
