@@ -3,22 +3,13 @@ from strategies.base_strategy import BasePickingStrategy
 
 
 class AbsoluteThresholdStrategy(BasePickingStrategy):
-    """A picking strategy that normalizes each trace by its peak-to-trough
-    amplitude and applies a absolute threshold to determine first-break picks.
-
-    Args:
-        threshold (float): The absolute threshold value.
-
-    Methods:
-        pick(data: np.ndarray) -> np.ndarray:
-            Implements the picking algorithm.
-    """
+    """Implements first-break picking using an absolute threshold method."""
 
     def __init__(self, threshold: float = 1e-9):
         self._threshold = threshold
 
     def pick(self, data: np.ndarray) -> np.ndarray:
-        """Performs first-break picking using the relative threshold method.
+        """Performs first-break picking using the absolute threshold.
 
         Args:
             data (np.ndarray): The 2D seismic data array, with

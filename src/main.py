@@ -4,7 +4,6 @@ from data_loader import load_seismic_data
 from analysis import convert_indices_to_time
 from visualization import plot_wiggles
 
-# --- Configuration ---
 ABSOLUTE_THRESHOLD = 1e-9
 BLOCK_SIZE = 64
 SAMPLING_FREQUENCY = 2000.0
@@ -12,7 +11,7 @@ SAMPLING_FREQUENCY = 2000.0
 if __name__ == "__main__":
     # 1. Load data
     print("Loading data...")
-    seismic_data, _, _ = load_seismic_data("data/simulation_ricker.mat")
+    seismic_data, fs, geometry = load_seismic_data("data/simulation_ricker.mat")
     strategy = AbsoluteThresholdStrategy(threshold=ABSOLUTE_THRESHOLD)
     picker = SeismicPicker(strategy=strategy, sampling_frequency=SAMPLING_FREQUENCY)
 
