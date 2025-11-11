@@ -4,7 +4,6 @@ from strategies.base_strategy import BasePickingStrategy
 
 
 class SeismicPicker:
-    DISPLAY_TITLE = "Seismographic Preview of First Breaks"
     """A class to perform seismic data picking using a specified strategy.
 
     Args:
@@ -16,6 +15,8 @@ class SeismicPicker:
         _strategy (BasePickingStrategy): The stored picking strategy object.
         _sampling_frequency (float): The sampling frequency of the seismic data.
     """
+
+    DISPLAY_TITLE = "Seismographic Preview of First Breaks"
 
     def __init__(self, strategy: BasePickingStrategy, sampling_frequency: float):
         self._strategy = strategy
