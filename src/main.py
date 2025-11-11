@@ -4,7 +4,7 @@ from data_loader import load_seismic_data
 from analysis import convert_indices_to_time
 from visualization import plot_wiggles
 
-ABSOLUTE_THRESHOLD = 1e-9
+ABSOLUTE_THRESHOLD = 2e-5
 BLOCK_SIZE = 64
 SAMPLING_FREQUENCY = 2000.0
 
