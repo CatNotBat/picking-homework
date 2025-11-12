@@ -5,7 +5,7 @@ from analysis import calculate_distances_from_source
 
 
 class ModelDrivenSTALTAStrategy(BasePickingStrategy):
-    GOOD_WINDOW_SAMPLE_RANGE = 40
+    GOOD_WINDOW_SAMPLE_RANGE = 20
     SEARCH_WINDOW_RADIUS = 40
 
     def __init__(
@@ -47,14 +47,17 @@ class ModelDrivenSTALTAStrategy(BasePickingStrategy):
         clean_distances = all_distances[good_mask]
         clean_indices = unfilterd_first_break_indices[good_mask]
 
-        model_coeffs = np.polyfit(clean_distances, clean_indices, 2)
-        predicted_indices = np.polyval(model_coeffs, all_distances).astype(int)
+        try:
+            model_coeffs = np.polyfit(clean_distances, clean_indices, 2)
+            predicted_indices = np.polyval(model_coeffs, all_distances).astype(int)
 
-        final_picks = self._run_model_driven_search(
-            data, predicted_indices, self.SEARCH_WINDOW_RADIUS
-        )
+            final_picks = self._run_model_driven_search(
+                data, predicted_indices, self.SEARCH_WINDOW_RADIUS
+            )
 
-        return final_picks
+            return final_picks
+        except np.linalg.LinAlgError:
+            return unfilterd_first_break_indices
 
     def _run_basic_sta_lta(self, data: np.ndarray) -> np.ndarray:
         _, num_traces = data.shape

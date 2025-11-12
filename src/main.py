@@ -2,12 +2,11 @@ from picker import SeismicPicker
 from strategies import sta_lta
 from data_loader import load_seismic_data
 from analysis import convert_indices_to_time
-from noise_generator import generate_pink_noise_to_get_target_snr
 from visualization import plot_sismograma
 
 
 ABSOLUTE_THRESHOLD = 2e-5
-TRIGGER_RATIO = 1.5
+TRIGGER_RATIO = 3.2
 BLOCK_SIZE = 64
 SAMPLING_FREQUENCY = 2000.0
 SNR = 10
@@ -17,9 +16,6 @@ if __name__ == "__main__":
     # 1. Load data
     print("Loading data...")
     seismic_data, fs, geometry = load_seismic_data(FILE_PATH)
-    seismic_data += generate_pink_noise_to_get_target_snr(
-        seismic_data, SNR, fs=SAMPLING_FREQUENCY
-    )
     strategy = sta_lta.ModelDrivenSTALTAStrategy(
         short_window=120, long_window=400, ratio_threshold=TRIGGER_RATIO
     )
