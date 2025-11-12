@@ -5,7 +5,7 @@ from analysis import calculate_distances_from_source
 
 
 class ModelDrivenSTALTAStrategy(BasePickingStrategy):
-    GOOD_WINDOW_SAMPLE_RANGE = 20
+    GOOD_WINDOW_SAMPLE_RANGE = 40
     SEARCH_WINDOW_RADIUS = 40
 
     def __init__(
@@ -35,6 +35,9 @@ class ModelDrivenSTALTAStrategy(BasePickingStrategy):
             geometry, unfilterd_first_break_indices
         )
         valid_picks = unfilterd_first_break_indices[unfilterd_first_break_indices > -1]
+        if not valid_picks.size > 0:
+            return unfilterd_first_break_indices
+
         min_valid_pick = np.min(valid_picks)
 
         good_mask = (unfilterd_first_break_indices > -1) & (
