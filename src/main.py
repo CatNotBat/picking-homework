@@ -12,8 +12,6 @@ SAMPLING_FREQUENCY = 2000.0
 FILE_PATH = "data/simulation_continuous.mat"
 
 if __name__ == "__main__":
-    # 1. Load data
-    print("Loading data...")
     seismic_data, fs, geometry = load_seismic_data(FILE_PATH)
     strategy = sta_lta.ModelDrivenSTALTAStrategy(
         short_window=120, long_window=400, ratio_threshold=TRIGGER_RATIO

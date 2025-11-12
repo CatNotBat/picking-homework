@@ -35,6 +35,9 @@ class ModelDrivenSTALTAStrategy(BasePickingStrategy):
             geometry, unfilterd_first_break_indices
         )
         valid_picks = unfilterd_first_break_indices[unfilterd_first_break_indices > -1]
+        if not valid_picks.size > 0:
+            return unfilterd_first_break_indices
+
         min_valid_pick = np.min(valid_picks)
 
         good_mask = (unfilterd_first_break_indices > -1) & (
@@ -44,14 +47,17 @@ class ModelDrivenSTALTAStrategy(BasePickingStrategy):
         clean_distances = all_distances[good_mask]
         clean_indices = unfilterd_first_break_indices[good_mask]
 
-        model_coeffs = np.polyfit(clean_distances, clean_indices, 2)
-        predicted_indices = np.polyval(model_coeffs, all_distances).astype(int)
+        try:
+            model_coeffs = np.polyfit(clean_distances, clean_indices, 2)
+            predicted_indices = np.polyval(model_coeffs, all_distances).astype(int)
 
-        final_picks = self._run_model_driven_search(
-            data, predicted_indices, self.SEARCH_WINDOW_RADIUS
-        )
+            final_picks = self._run_model_driven_search(
+                data, predicted_indices, self.SEARCH_WINDOW_RADIUS
+            )
 
-        return final_picks
+            return final_picks
+        except np.linalg.LinAlgError:
+            return unfilterd_first_break_indices
 
     def _run_basic_sta_lta(self, data: np.ndarray) -> np.ndarray:
         _, num_traces = data.shape

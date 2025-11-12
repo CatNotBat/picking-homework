@@ -7,7 +7,7 @@ def plot_sismograma(
     data_block: np.ndarray,
     pick_times_ms: Optional[np.ndarray],
     frequency: float,
-    title: str = "Seismic Wiggle Plot",
+    title: str = "Seismic First-Break plot",
 ):
     num_samples, num_traces = data_block.shape
 
